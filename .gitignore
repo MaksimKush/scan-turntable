@@ -1,0 +1,25 @@
+# Local / build
+.pio/
+.vscode/.browse.c_d*
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/ipch
+*.exe
+*.pdb
+*.obj
+*.user
+*.suo
+.DS_Store
+Thumbs.db
+.env
+credentials.json
+*.log
+
+# SolidWorks automation helpers (keep .SLD* models)
+cad/*.dll
+cad/*.exe
+cad/*.pdb
+cad/com_ok.txt
+cad/*.ps1
+
+cad/~$*
