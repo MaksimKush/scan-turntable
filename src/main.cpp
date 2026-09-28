@@ -1,5 +1,5 @@
 // Поворотный стол для фотограмметрии.
-// Мотор: Minebea PM42L-048-EPAO — 48 полных шагов/об (7.5°).
+// Мотор: Minebea Mitsumi PM35L-N48 — 48 полных шагов/об (7.5°).
 // Драйвер: EasyDriver (schmalzhaus.com), по умолчанию 1/8 шага → 384 микрошага/об.
 // Плата: ESP32-C3, дисплея нет. Управление: USB-Serial и Wi-Fi точка ScanTable.
 //
@@ -305,7 +305,7 @@ void setup() {
   Serial.begin(115200);
   delay(300);
   Serial.println("scan-turntable ESP32-C3");
-  Serial.println("PM42L-048 48 step, EasyDriver 1/8 -> 384 ustep/rev");
+  Serial.println("PM35L-N48 48 step, EasyDriver 1/8 -> 384 ustep/rev");
   Serial.println("SCAN 48 1500 | JOG 15 | SPEED 250 | STOP");
 
   WiFi.mode(WIFI_AP);
