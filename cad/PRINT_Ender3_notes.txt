@@ -1,0 +1,24 @@
+﻿Печать под Ender 3 (стол 220x220 мм, запас → макс. деталь ~210 мм)
+================================================================
+Платформа: Platform_Tilt.SLDPRT — круг Ø200 x 6 мм (одна деталь, плашмя).
+
+Список печатных деталей (габарит) vs лимит 210 мм на стол:
+  Base_Revopoint.SLDPRT     Ø200 x 8 mm         OK (200<=210)
+  Hub_Azimuth.SLDPRT        Ø60 x 16 mm         OK
+  Yoke_Base.SLDPRT          210 x 55 x 8 mm     OK (на пределе)
+  Yoke_Arm_L.SLDPRT         50 x 100 x 10 mm    OK (плашмя)
+  Yoke_Arm_R.SLDPRT         50 x 100 x 10 mm    OK
+  Platform_Tilt.SLDPRT      Ø200 x 6 mm         OK  <-- платформа
+  Clamp_TiltShaft.SLDPRT    24 x 16 x 10 mm     OK x2
+  Shaft_Tilt.SLDPRT         Ø8 x 220 mm         XY OK; длину 220 лучше металлом Ø8
+                                                (или пластик вертикально, Z~250 у Ender3)
+
+Непечатные / покупные:
+  Motor_PM42L_048_EPAO x2, Pulley_GT2_12T x2, винты M3
+
+Сборка (как Revopoint: азимут + наклон):
+  Motor1 (Z) на Base → GT2 → Hub → Yoke_Base + Arm_L/R
+  Motor2 (наклон) на Arm_L → GT2 → вал → Platform_Tilt Ø200
+
+FDM: PLA/PETG, стенки >=2 мм (детали 6-10 мм), вилы разборные на M3.
+Сборка: Turntable_Revopoint2Motor.SLDASM

@@ -1,0 +1,73 @@
+GT2 belt → pulley profile notes
+================================
+Source belt drawing: cad/GT2-Belt_profile_1.jpg (+ user screenshot)
+Motor outline: cad/file_07_40.gif (Minebea PM42 file_07_40)
+
+Belt (drawing)
+--------------
+P            = 2.00 mm
+Tooth height = 0.75 mm
+Total height = 1.38 mm
+PLD          = 0.254 mm
+Tip radius   = R0.555  (center on tooth CL)
+Flank radius = R1.00   (labeled center offset 0.40 from CL)
+Root fillet  = R0.15
+
+Pulley (12T, this rebuild)
+-------------------------
+z            = 12
+PD           = z*P/π = 12*2/π = 7.6394 mm
+OD           = PD − 2×PLD = 7.6394 − 0.508 = 7.1314 mm
+Length L     = 6.00 mm (no flanges)
+Bore         = Ø3.00 mm
+Clearance    = 0.05 mm (groove larger than belt tooth; radial)
+
+How belt → pulley was inverted
+------------------------------
+1. Belt land (valley between teeth) rides at pulley OD.
+2. Belt tooth tip seats in the pulley groove → groove depth ≈ tooth height
+   + clearance (0.75 + 0.05 = 0.80 mm from OD toward axis).
+3. Groove outline = belt tooth outline with radii enlarged by clearance:
+     tip  R = 0.555 + 0.05 = 0.605 mm, center on CL at y = H_clr − R_tip
+     root R = 0.15  + 0.05 = 0.20  mm, centers at x = ±(0.75 + 0.02) mm
+4. Tip and root circles (with clearance) intersect; join at the upper
+   intersection → closed cut polygon, circular-patterned ×12.
+5. Front Plane sketch; extrude/cut along +Z.
+
+Why R1.00 @ 0.40 was not used as a separate flank arc
+------------------------------------------------------
+A G1 (tangent) blend of tip R0.555 and flank R1.00 requires center-distance
+|Rf − Rt| = 0.445 mm. That forces 2×Rt = 1.11 > Rf = 1.00, so the near-side
+tooth join is geometrically impossible (contact falls on the far side of the
+tip circle). Empirically, published GT2 polygon profiles (and this drawing’s
+tip/root) are well-fit by tip R0.555 + root R0.15 alone; the labeled R1@0.40
+is retained as drawing intent but omitted from the CAD flank as a separate
+arc. Lateral X-scale of a forced R1@0.40 construction was rejected as it
+distorts the tip radius.
+
+Groove radii centers (belt-local mm, y=0 at land, +y into groove)
+-----------------------------------------------------------------
+Tip center:   ( 0.000, 0.195)  R=0.605 (with clr; 0.195 = 0.80 − 0.605)
+Root centers: (±0.770, 0.200)  R=0.200
+Join (approx):(±0.596, 0.299)
+
+Assembly
+--------
+Motor_PM42L_048_EPAO + Pulley_GT2_12T
+Shaft tip (EPAO I1≈17 from boss) = 0.8 + 1.5 + 17 = 19.3 mm from Front
+Pulley Z = 11.3 .. 17.3 mm  → tip past pulley end = +2.0 mm
+
+Motor vs file_07_40.gif
+-----------------------
+GIF / catalog          Model (BuildPM42Epao)
+Ø42                    Ø42
+22.2 MAX               0.8 + 21.4 = 22.2
+flange 0.8             0.8
+boss Ø10 × 1.5         Ø10 × 1.5
+P=49.5±0.1             49.5
+2-Ø3.5                 Ø3.5
+2-R3.75                R3.75
+shaft Ø3               Ø3
+I1 (EPAO ≈17)          17 mm from boss
+rear 1 MAX             1.0
+wire 12.7 / 5.5 MAX    12.7 / 5.5, θ=45°
