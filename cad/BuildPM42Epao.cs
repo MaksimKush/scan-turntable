@@ -2,6 +2,10 @@
 // Ø42, L=22.2, mount P=49.5, holes Ø3.5, ears R3.75, boss Ø10×1.5, shaft Ø3
 // EPAO: shaft stickout ~17 mm from boss (retail outline)
 // + GT2 12T pulley no flange, L=6, tip +2 mm
+//
+// USER-OWNED MOTOR: Motor_PM42L_048_EPAO.SLDPRT was redrawn by the user in SolidWorks.
+// DO NOT auto-rebuild / overwrite that file. Main() skips BuildMotor. BuildMotor() is
+// retained only as historical reference and refuses to write the user part.
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -148,81 +152,9 @@ class Program
 
     static void BuildMotor(SldWorks sw)
     {
-        Log("=== Motor PM42L-048-EPAO ===");
-        ModelDoc2 m = NewPart(sw);
-        string front = FrontPlane(m);
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, 0, 0, BodyOd / 2.0);
-        Extrude(m, PlateT, false);
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, MountP / 2.0, 0, EarR);
-        Extrude(m, PlateT, false);
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, -MountP / 2.0, 0, EarR);
-        Extrude(m, PlateT, false);
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, MountP / 2.0, 0, MountHole / 2.0);
-        m.SketchManager.CreateCircleByRadius(0, -MountP / 2.0, 0, MountHole / 2.0);
-        try { CutBlind(m, PlateT + 0.001); Log("Mount holes OK"); }
-        catch (Exception ex) { Log("holes: " + ex.Message); try { m.SketchManager.InsertSketch(true); } catch { } }
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, 0, 0, BodyOd / 2.0);
-        Extrude(m, CanLen, true);
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, 0, 0, 0.004);
-        Extrude(m, CanLen + RearBossH, true);
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, 0, 0, BossOd / 2.0);
-        Extrude(m, PlateT + BossH, false);
-
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        m.SketchManager.CreateCircleByRadius(0, 0, 0, ShaftDia / 2.0);
-        Extrude(m, PlateT + BossH + ShaftL1, false);
-
-        double th = WireThetaDeg * Math.PI / 180.0;
-        double ux = Math.Cos(th), uy = Math.Sin(th);
-        double vx = -Math.Sin(th), vy = Math.Cos(th);
-        double r0 = BodyOd / 2.0 - 0.0005, r1 = BodyOd / 2.0 + WireRadial, hw = WireW / 2.0;
-        double[] xs = { ux*r0+vx*(-hw), ux*r0+vx*hw, ux*r1+vx*hw, ux*r1+vx*(-hw) };
-        double[] ys = { uy*r0+vy*(-hw), uy*r0+vy*hw, uy*r1+vy*hw, uy*r1+vy*(-hw) };
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        for (int i = 0; i < 4; i++)
-            m.SketchManager.CreateLine(xs[i], ys[i], 0, xs[(i + 1) % 4], ys[(i + 1) % 4], 0);
-        Extrude(m, 0.012, true);
-        m.Extension.SelectByID2(front, "PLANE", 0, 0, 0, false, 0, null, 0);
-        m.SketchManager.InsertSketch(true);
-        for (int i = 0; i < 4; i++)
-            m.SketchManager.CreateLine(xs[i], ys[i], 0, xs[(i + 1) % 4], ys[(i + 1) % 4], 0);
-        Extrude(m, PlateT + 0.002, false);
-
-        string tmp = Path.Combine(OutDir, "Motor_PM42L_048_EPAO_new.SLDPRT");
-        SaveDoc(m, tmp);
-        sw.CloseDoc(m.GetTitle());
-        ReplaceFile(tmp, Path.Combine(OutDir, "Motor_PM42L_048_EPAO.SLDPRT"));
-        // also refresh Motor_PM42L.SLDPRT alias
-        try
-        {
-            File.Copy(Path.Combine(OutDir, "Motor_PM42L_048_EPAO.SLDPRT"),
-                Path.Combine(OutDir, "Motor_PM42L.SLDPRT"), true);
-        }
-        catch { }
-        Log("Motor OK Ø42 P=49.5 shaft l1=17mm EPAO");
+        // USER-OWNED: Motor_PM42L_048_EPAO.SLDPRT was redrawn by the user.
+        // Historical auto-geometry removed — do not regenerate or ReplaceFile that part.
+        Log("SKIP BuildMotor — Motor_PM42L_048_EPAO.SLDPRT is user-owned; refusing overwrite");
     }
 
     static void BuildPulley(SldWorks sw)

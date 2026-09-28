@@ -5,8 +5,8 @@
 ## Оборудование
 
 - Мотор: Minebea Mitsumi **PM42L-048-EPAO** ×**2** (маркировка **EM-182 TB9608E**; 48 шагов/об, 7.5°; Ø42×22.2 мм, вал Ø3 мм; bipolar) — азимут + наклон
-- Шкив на валу: **GT2 12T** без фланца (L=6 мм, шаг 2 мм; PD≈7.64 мм; торец вала +2 мм за шкивом)
-- Платформа сканирования: **Ø200 мм** (печать на Ender 3 плашмя)
+- Шкив / шестерня на валу: **spur pinion m=2 z=12** (азимут → венец платформы); опционально GT2 12T для старых сборок
+- Платформа сканирования: **Ø200 мм** с **зубчатым венцом** по ободу (печать на Ender 3 плашмя)
 - Драйвер: **EasyDriver** (по умолчанию 1/8 шага → 384 микрошага/об; ток ~600 мА)
 - Контроллер: **ESP32-C3**
 
@@ -44,25 +44,28 @@ MS1/MS2 не подключать — на плате уже 1/8. Питание
 
 ## CAD
 
-SolidWorks в `cad/` (контур мотора — `file_07_40.gif`; профиль шкива — из чертежа ремня GT2, см. `GT2_pulley_profile_notes.txt`).
+SolidWorks в `cad/` (контур мотора — `file_07_40.gif`; азимут — шестерня × венец, см. `GEAR_rim_pinion_notes.txt`).
 
-### Мотор и шкив
-- `Motor_PM42L_048_EPAO.SLDPRT` — Ø42, L=22.2, P=49.5, Ø3.5, R3.75, бобышка Ø10×1.5, вал Ø3, EPAO ~17 мм
-- `Pulley_GT2_12T.SLDPRT` — GT2 12T, PD≈7.64, OD≈7.13, L=6, без фланца, отверстие Ø3 (канавки = инверсия зуба ремня R0.555+R0.15, зазор 0.05)
-- `Motor_PM42L_048_EPAO_Pulley.SLDASM` — мотор + шкив (торец вала +2 мм)
+### Мотор (user-owned) и привод
+- `Motor_PM42L_048_EPAO.SLDPRT` — **перерисован пользователем**; скрипты **не** пересобирают этот файл
+- `Pinion_Spur_Z12_M2.SLDPRT` — шестерня m=2, z=12, bore Ø3, L=8; торец вала +2 мм
+- `Motor_PM42L_048_EPAO_Pinion.SLDASM` — мотор + шестерня
+- `Pulley_GT2_12T.SLDPRT` / `Motor_PM42L_048_EPAO_Pulley.SLDASM` — прежний вариант с ремнём GT2 (архив)
 
-### Двухосевой стол (как Revopoint), 2× PM42 — печать под Ender 3
+### Двухосевой стол (как Revopoint A230), 2× PM42 — печать под Ender 3
 Сборка: `Turntable_Revopoint2Motor.SLDASM`  
-Motor1 = азимут (Z), Motor2 = наклон платформы. Детали под стол **220×220** (лимит детали ~210 мм). Заметки: `PRINT_Ender3_notes.txt`.
+Motor1 = азимут (шестерня → зубчатый венец Ø200), Motor2 = наклон U-люльки.  
+Корпус закрытый (Base_Housing + крышки). Заметки: `PRINT_Ender3_notes.txt`, `GEAR_rim_pinion_notes.txt`.
 
 | Файл | Габарит | Стол 220×220 |
 |------|---------|--------------|
-| **`Platform_Tilt.SLDPRT`** | **круг Ø200 × 6 мм** | OK |
-| `Base_Revopoint.SLDPRT` | Ø200 × 8 | OK |
-| `Yoke_Base.SLDPRT` | 210×55×8 | OK |
-| `Yoke_Arm_L/R.SLDPRT` | 50×100×10 (разборная вилка) | OK |
-| `Hub_Azimuth.SLDPRT` | Ø60 × 16 | OK |
-| `Clamp_TiltShaft.SLDPRT` ×2 | 24×16×10 | OK |
-| `Shaft_Tilt.SLDPRT` | Ø8 × 220 | лучше металлический пруток |
+| **`Platform_RimGear_200.SLDPRT`** | **tip Ø200 × 14 мм, z=98, m=2** | OK |
+| `Base_Housing.SLDPRT` | Ø200 × 36 | OK |
+| `Cover_Base_Top.SLDPRT` | Ø200 × 4 | OK |
+| `Yoke_Cradle_Base.SLDPRT` | ~192×55×8 | OK |
+| `Yoke_Cradle_Arm_L/R.SLDPRT` | 28×48×12 | OK |
+| `Cover_Arm_Motor.SLDPRT` | 55×58×22 | OK |
+| `Pinion_Spur_Z12_M2.SLDPRT` | Ø28 × ~12 | OK |
+| `Shaft_Tilt.SLDPRT` | Ø8 × 190 | лучше металлический пруток |
 
-FDM: PLA/PETG, стенки ≥2 мм. Вилка разборная на M3, чтобы не превышать размер стола.
+FDM: PLA/PETG. Цель по габариту как Revopoint: **Ø200 × ~H82**.

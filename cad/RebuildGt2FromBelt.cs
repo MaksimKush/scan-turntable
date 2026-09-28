@@ -2,6 +2,7 @@
 // R1.00@0.40 cannot G1-blend with R0.555 (2*Rt > Rf) — see GT2_pulley_profile_notes.txt.
 // 12T, P=2, PLD=0.254, L=6, no flange, bore Ø3. Front Plane → +Z.
 // Also refreshes Motor_PM42L_048_EPAO_Pulley.SLDASM (shaft tip +2 mm past pulley).
+// USER-OWNED: never overwrite Motor_PM42L_048_EPAO.SLDPRT — assemble against user's part only.
 using System;
 using System.Collections.Generic;
 using System.IO;

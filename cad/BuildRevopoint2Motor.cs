@@ -1,5 +1,7 @@
 // Revopoint-like 2-motor turntable — FDM / Ender 3 (220×220 bed, ~210 mm max part)
-// Platform Ø200 mm. Yoke split: base + 2 arms (screw join). 2× PM42L-048-EPAO + GT2 12T.
+// Platform Ø200 mm. Yoke split: base + 2 arms (screw join). 2× PM42L-048-EPAO.
+// USER-OWNED MOTOR: do not regenerate Motor_PM42L_048_EPAO.SLDPRT from this script.
+// Prefer BuildRevopointLike.cs for pinion+rim azimuth and enclosed housing.
 using System;
 using System.IO;
 using System.Runtime.InteropServices;

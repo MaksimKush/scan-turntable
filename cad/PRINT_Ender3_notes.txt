@@ -1,24 +1,26 @@
-﻿Печать под Ender 3 (стол 220x220 мм, запас → макс. деталь ~210 мм)
-================================================================
-Платформа: Platform_Tilt.SLDPRT — круг Ø200 x 6 мм (одна деталь, плашмя).
+Печать под Ender 3 (стол 220×220 → макс ~210) — Revopoint-like Dual-axis (Ø200×~H82 target)
+========================================================================================
+Визуал (как Revopoint A230-II):
+  — цилиндрический закрытый корпус базы Ø200
+  — короткая U-люлька (cradle) со стойками
+  — круглая платформа Ø200 с зубчатым венцом по ободу
+  — крышки, прячущие моторы (Cover_Base_Top, Cover_Arm_Motor)
 
-Список печатных деталей (габарит) vs лимит 210 мм на стол:
-  Base_Revopoint.SLDPRT     Ø200 x 8 mm         OK (200<=210)
-  Hub_Azimuth.SLDPRT        Ø60 x 16 mm         OK
-  Yoke_Base.SLDPRT          210 x 55 x 8 mm     OK (на пределе)
-  Yoke_Arm_L.SLDPRT         50 x 100 x 10 mm    OK (плашмя)
-  Yoke_Arm_R.SLDPRT         50 x 100 x 10 mm    OK
-  Platform_Tilt.SLDPRT      Ø200 x 6 mm         OK  <-- платформа
-  Clamp_TiltShaft.SLDPRT    24 x 16 x 10 mm     OK x2
-  Shaft_Tilt.SLDPRT         Ø8 x 220 mm         XY OK; длину 220 лучше металлом Ø8
-                                                (или пластик вертикально, Z~250 у Ender3)
+Печатные:
+  Base_Housing.SLDPRT          Ø200 × 36
+  Cover_Base_Top.SLDPRT        Ø200 × 4
+  Platform_RimGear_200.SLDPRT  tipØ200 × 14 (зубья 8 + палуба 6) — ОДНА деталь
+  Yoke_Cradle_Base.SLDPRT      ~192 × 55 × 8
+  Yoke_Cradle_Arm_L/R.SLDPRT   28 × 48 × 12
+  Cover_Arm_Motor.SLDPRT       55 × 58 × 22
+  Pinion_Spur_Z12_M2.SLDPRT    Ø28 × ~12
+  Shaft_Tilt.SLDPRT            Ø8 × 190 (лучше металлический прут)
 
-Непечатные / покупные:
-  Motor_PM42L_048_EPAO x2, Pulley_GT2_12T x2, винты M3
+Покупные / user (НЕ пересобирать скриптом):
+  Motor_PM42L_048_EPAO ×2
 
-Сборка (как Revopoint: азимут + наклон):
-  Motor1 (Z) на Base → GT2 → Hub → Yoke_Base + Arm_L/R
-  Motor2 (наклон) на Arm_L → GT2 → вал → Platform_Tilt Ø200
+Сборка / кинематика:
+  Motor1 в базе → шестерня Pinion_Spur_Z12_M2 → венец Platform_RimGear (азимут 360°)
+  Motor2 на левой стойке + крышка → наклон люльки (цель ±30° как Revopoint)
 
-FDM: PLA/PETG, стенки >=2 мм (детали 6-10 мм), вилы разборные на M3.
-Сборка: Turntable_Revopoint2Motor.SLDASM
+Скрипт: BuildRevopointLike.cs  (+ FixPlatformRim.cs если нужна пересборка венца)

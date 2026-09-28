@@ -1,0 +1,17 @@
+Azimuth drive — spur pinion x rim gear (шестерня + зубчатый венец / «рейка» по ободу)
+==============================================================================
+Module m = 2.0 mm
+Pinion:  Pinion_Spur_Z12_M2.SLDPRT     z=12   d=24   da=28   df=19    face=8  bore=Ø3
+Rim:     Platform_RimGear_200.SLDPRT   z=98   d=196  da=200  df=191   face=8 + deck 6
+Center distance CD = (d_rim + d_pinion)/2 = 110 mm
+Shaft tip past pinion = +2 mm
+Ratio = 98/12 ≈ 8.17 : 1
+
+Placement:
+  Motor1 (user Motor_PM42L_048_EPAO) in Base_Housing at X=CD=110 mm, Z=floor
+  Pinion on shaft: Z = tipZ - 2 - 8  (tip sticks +2 mm past pinion)
+  Platform centered on Z axis; rim teeth mesh pinion at CD
+
+USER MOTOR: Motor_PM42L_048_EPAO.SLDPRT is user-owned — do NOT auto-rebuild.
+Assembly: Motor_PM42L_048_EPAO_Pinion.SLDASM
+Turntable: Turntable_Revopoint2Motor.SLDASM
